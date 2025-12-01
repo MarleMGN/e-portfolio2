@@ -4,21 +4,33 @@
 
 function contact(event) {
     event.preventDefault();
-    // emailjs
-    //     .sendForm(
-    //         'service_wpgxell',
-    //         'template_4ad3dqc',
-    //         event.target,
-    //         'l0CFSszmDxoIJdYWA'
-    //     ).then(() => {
-    //         console.log('this worked1')
-    //     })
     const loading = document.querySelector('.modal__overlay--loading');
     const success = document.querySelector('.modal__overlay--success');
     loading.classList += " modal__overlay--visible"
-    setTimeout(() => {
-        loading.classList.remove("modal__overlay--visible");
-        success.classList += " modal__overlay--visible"
-        console.log('it worked 1')
-    }, 1000);
+    
+    emailjs
+        .sendForm(
+            'service_wpgxell',
+            'template_4ad3dqc',
+            event.target,
+            'l0CFSszmDxoIJdYWA'
+        ).then(() => {
+            loading.classList.remove("modal__overlay--visible");
+            success.classList += " modal__overlay--visible"
+        }).catch(() => {
+            loading.classList.remove("modal__overlay--visible");
+            alert(
+                "The email service is temporarily unavailable. Please contact me directly at m0b.torres23@gmail.com"
+            );
+        })
+}
+
+let isModalOpen = false;
+function toggleModal() {
+    if (isModalOpen) {
+        isModalOpen = false;
+        return document.body.classList.remove("modal--open")
+    }
+    isModalOpen = true;
+    document.body.classList += " modal--open"
 }
