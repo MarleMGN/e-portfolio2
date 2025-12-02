@@ -1,6 +1,26 @@
-// template_4ad3dqc
-// service_wpgxell
-// l0CFSszmDxoIJdYWA
+let isModalOpen = false;
+let contrastToggle = false;
+
+function moveBackground(event) {
+    const shapes = document.querySelectorAll(".shape");
+    const x = event.clientX;
+    const y = event.clientY;
+    
+    for (let i = 0; i < shapes.length; ++i) {
+        shapes[i].style.transform = 'translate(${x}px, ${y}px)'
+    }
+}
+
+function toggleContrast() {
+    contrastToggle = !contrastToggle;
+    if (contrastToggle) {
+        document.body.classList += " dark-theme"
+    }
+    else {
+        document.body.classList.remove("dark-theme")
+    }
+}
+
 
 function contact(event) {
     event.preventDefault();
@@ -25,7 +45,6 @@ function contact(event) {
         })
 }
 
-let isModalOpen = false;
 function toggleModal() {
     if (isModalOpen) {
         isModalOpen = false;
